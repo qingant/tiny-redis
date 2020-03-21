@@ -23,7 +23,8 @@ export interface RedisError {
 export interface RedisNil {
   tag: "RedisNil";
 }
-export type ArrayItem = RedisString | RedisNumber | RedisError | RedisBulkString;
+export type ArrayItem = RedisString | RedisNumber | RedisError
+  | RedisBulkString;
 export interface RedisArray {
   tag: "RedisArray";
   value: ArrayItem[];

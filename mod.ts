@@ -1,12 +1,10 @@
 import { RedisClient } from "./client.ts";
 import { DatabaseHandler } from "./database.ts";
-export *  from "./parser.ts";
-export *  from "./protocol.ts";
-export *  from "./handler.ts";
-export * from './client.ts';
+export * from "./parser.ts";
+export * from "./protocol.ts";
+export * from "./handler.ts";
+export * from "./client.ts";
 import { parse as argParse } from "https://deno.land/std/flags/mod.ts";
-
-
 
 export const main = async () => {
   const { args } = Deno;
