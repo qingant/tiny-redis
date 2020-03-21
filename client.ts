@@ -1,4 +1,4 @@
-import { StreamType, RedisParser } from "./protocol.ts";
+import { StreamType, RedisParser } from "./parser.ts";
 import { RedisArray, encode } from "./resp.ts";
 import { RedisHandler } from "./handler.ts";
 
