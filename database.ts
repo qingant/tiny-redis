@@ -3,11 +3,11 @@ import {
   RedisArray,
   RedisValue,
   RedisString,
-  Redis,
+  RedisValueOf,
   RedisBulkString,
   RedisNumber,
   bufferToString
-} from "./resp.ts";
+} from "./protocol.ts";
 
 type Database = { [index: string]: RedisBulkString | RedisNumber };
 
@@ -30,12 +30,12 @@ export class DatabaseHandler extends BaseHandler {
       const v = kvs[i * 2 + 1] as RedisBulkString;
       this.database[this.db][bufferToString(key)] = v;
     }
-    return Redis.number(i);
+    return RedisValueOf.number(i);
   }
   private async command_GET(request: RedisArray): Promise<RedisValue> {
     const key = request.value[1] as RedisBulkString | RedisString;
     if (!key) {
-      return Redis.nil;
+      return RedisValueOf.nil;
     } else {
       return this.database[this.db][bufferToString(key.value)];
     }

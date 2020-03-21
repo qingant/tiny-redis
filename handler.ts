@@ -3,8 +3,8 @@ import {
   RedisValue,
   stringToBuffer,
   bufferToString,
-  Redis
-} from "./resp.ts";
+  RedisValueOf
+} from "./protocol.ts";
 import { RedisClient } from "./client.ts";
 
 export interface RedisHandler {
@@ -25,7 +25,7 @@ export class BaseHandler implements RedisHandler {
   }
 
   private async command_INFO(request: RedisArray): Promise<RedisValue> {
-    return Redis.array([
+    return RedisValueOf.array([
       `# Tiny Redis`,
       `Deno v${JSON.stringify(Deno.version)}`,
       "",
@@ -37,7 +37,7 @@ export class BaseHandler implements RedisHandler {
 
   private async command_COMMAND(request: RedisArray): Promise<RedisValue> {
     const cmds = Object.keys(this.commands);
-    return Redis.array([...cmds, ...Object.keys(this._commands)]);
+    return RedisValueOf.array([...cmds, ...Object.keys(this._commands)]);
   }
 
   _commands: { [index: string]: any } = {

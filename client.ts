@@ -1,5 +1,5 @@
 import { StreamType, RedisParser } from "./parser.ts";
-import { RedisArray, encode } from "./resp.ts";
+import { RedisArray, encode } from "./protocol.ts";
 import { RedisHandler } from "./handler.ts";
 
 export class RedisClient {

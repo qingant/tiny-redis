@@ -1,5 +1,6 @@
-import { redis } from 'https://raw.githubusercontent.com/qingant/tiny-redis/master/mod.ts';
+import { encode, RedisValueOf, RedisParser, show } from '../mod.ts';
 import { parse as argParse } from "https://deno.land/std/flags/mod.ts";
+
 
 const main = async () => {
     const { args } = Deno;
@@ -12,7 +13,7 @@ const main = async () => {
     const conn = await Deno.connect(opts)
 
     // create a redis command and encode it to [Uint8Array]
-    const cmdEncoded = redis.encode(redis.Redis.array([
+    const cmdEncoded = encode(RedisValueOf.array([
         'INFO',
         'MEMORY',
     ]));
@@ -23,9 +24,9 @@ const main = async () => {
     }
 
     // create a parser and get the result
-    const p = new redis.RedisParser(conn);
+    const p = new RedisParser(conn);
     const req = await p.parse()
-    console.log(redis.show(req));
+    console.log(show(req));
 }
 
 await main();

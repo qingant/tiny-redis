@@ -9,7 +9,7 @@ import {
   stringToBuffer,
   show,
   ArrayItem
-} from "./resp.ts";
+} from "./protocol.ts";
 
 const returnChar = "\r".charCodeAt(0);
 const newlineChar = "\n".charCodeAt(0);
