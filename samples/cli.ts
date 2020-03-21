@@ -1,11 +1,15 @@
 import { redis } from 'https://raw.githubusercontent.com/qingant/tiny-redis/master/mod.ts';
+import { parse as argParse } from "https://deno.land/std/flags/mod.ts";
 
 const main = async () => {
+    const { args } = Deno;
+    const config = argParse(args);
+    const opts = {
+      port: config.p || 6636,
+      hostname: config.h || "0.0.0.0"
+    };
     // connect to redis server
-    const conn = await Deno.connect({
-        hostname: '127.0.0.1',
-        port: 6636
-    })
+    const conn = await Deno.connect(opts)
 
     // create a redis command and encode it to [Uint8Array]
     const cmdEncoded = redis.encode(redis.Redis.array([
