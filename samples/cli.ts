@@ -1,13 +1,15 @@
 import { encode, RedisValueOf, RedisParser, show } from "../mod.ts";
 import { parse as argParse } from "https://deno.land/std/flags/mod.ts";
 
+const { args } = Deno;
+const config = argParse(args);
+const opts = {
+  port: config.p || 6636,
+  hostname: config.h || "127.0.0.1"
+};
+
 const main = async () => {
-  const { args } = Deno;
-  const config = argParse(args);
-  const opts = {
-    port: config.p || 6636,
-    hostname: config.h || "127.0.0.1"
-  };
+
   // connect to redis server
   const conn = await Deno.connect(opts);
 

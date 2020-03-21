@@ -7,6 +7,13 @@ import {
 } from "../mod.ts";
 import { parse as argParse } from "https://deno.land/std/flags/mod.ts";
 
+const { args } = Deno;
+const config = argParse(args);
+const opts = {
+  port: config.p || 6666,
+  hostname: config.h || "0.0.0.0"
+};
+
 class MyHandler extends BaseHandler {
   commands = {
     "TINY": this.command_TINY
@@ -17,12 +24,7 @@ class MyHandler extends BaseHandler {
 }
 
 const main = async () => {
-  const { args } = Deno;
-  const config = argParse(args);
-  const opts = {
-    port: config.p || 6636,
-    hostname: config.h || "0.0.0.0"
-  };
+
   const listener = Deno.listen(opts);
   const handler = new MyHandler();
   console.log("Tiny Redis 0.0.1");
