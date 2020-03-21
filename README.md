@@ -18,15 +18,7 @@ deno -A https://raw.githubusercontent.com/qingant/tiny-redis/master/mod.ts
 
 Surely you can also clone the repo `https://github.com/qingant/tiny-redis.git` and then run `deno -A mod.ts` in the project directory.
 
-Get Deno if you do not have one:
-
-```shell
-// Using Shell:
-curl -fsSL https://deno.land/x/install/install.sh | sh
-
-//Or using PowerShell:
-iwr https://deno.land/x/install/install.ps1 -useb | iex
-```
+[Get Deno](https://deno.land/) if you do not have one:
 
 Write the content below into `test.ts` wherever you like and run `deno -A test.ts`,
 
@@ -34,14 +26,11 @@ Write the content below into `test.ts` wherever you like and run `deno -A test.t
 
 ```typescript
 import { encode, RedisValueOf, RedisParser, show } from 'https://raw.githubusercontent.com/qingant/tiny-redis/master/mod.ts';
-import { parse as argParse } from "https://deno.land/std/flags/mod.ts";
 
 const main = async () => {
-  const { args } = Deno;
-  const config = argParse(args);
   const opts = {
-    port: config.p || 6636,
-    hostname: config.h || "127.0.0.1"
+    port: 6379,
+    hostname: "127.0.0.1"
   };
   // connect to redis server
   const conn = await Deno.connect(opts);
@@ -78,7 +67,7 @@ For the server side, if you want to implement something that talks redis protoco
 
 ```typescript
 import {RedisArray, RedisValue, RedisClient, RedisValueOf, BaseHandler} from 'https://raw.githubusercontent.com/qingant/tiny-redis/master/mod.ts';
-import { parse as argParse } from "https://deno.land/std/flags/mod.ts";
+
 
 class MyHandler extends BaseHandler {
     commands = {
@@ -90,11 +79,10 @@ class MyHandler extends BaseHandler {
 }
 
 const main = async () => {
-    const { args } = Deno;
-    const config = argParse(args);
+
     const opts = {
-      port: config.p || 6636,
-      hostname: config.h || "0.0.0.0"
+      port: 6666,
+      hostname: "0.0.0.0"
     };
     const listener = Deno.listen(opts);
     const handler = new MyHandler();
