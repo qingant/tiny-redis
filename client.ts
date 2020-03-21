@@ -26,7 +26,7 @@ export class RedisClient {
 
   public async _loop(): Promise<void> {
     while (true) {
-      const request = await this.parser.getRequest() as RedisArray;
+      const request = await this.parser.getResp() as RedisArray;
       const resp = await this.handler.onRequest(request);
       let r = encode(resp);
       for (let i in r) {

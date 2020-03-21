@@ -117,7 +117,7 @@ export class RedisParser {
         throw new FatalError("Protocol Error");
     }
   }
-  public async getRequest(): Promise<RedisValue> {
+  public async getResp(): Promise<RedisValue> {
     if (this.contentTail - this.start === 0) {
       await this.readMore();
     }
@@ -152,6 +152,6 @@ if (import.meta.main) {
     stream.writeSync(buffers[i]);
   }
   const p = new RedisParser(stream);
-  const resp = show(await p.getRequest());
+  const resp = show(await p.getResp());
   console.log(resp);
 }
