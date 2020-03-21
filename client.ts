@@ -18,7 +18,7 @@ export class RedisClient {
     try {
       await this._loop();
     } catch (e) {
-      console.log(`Connection Exit: ${JSON.stringify(e)}`);
+      console.log(`Connection Exit: ${JSON.stringify(e)}`, e);
     } finally {
       this.handler.onConnExit(this);
     }
@@ -26,7 +26,7 @@ export class RedisClient {
 
   public async _loop(): Promise<void> {
     while (true) {
-      const request = await this.parser.getResp() as RedisArray;
+      const request = await this.parser.parse() as RedisArray;
       const resp = await this.handler.onRequest(request);
       let r = encode(resp);
       for (let i in r) {

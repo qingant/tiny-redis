@@ -7,7 +7,8 @@ import {
   bufferToString,
   encode,
   stringToBuffer,
-  show
+  show,
+  ArrayItem
 } from "./resp.ts";
 
 const returnChar = "\r".charCodeAt(0);
@@ -34,7 +35,7 @@ export class RedisParser {
       buffer.set(this.buffer, 0);
       this.buffer = buffer;
     }
-    let n = await this.conn.read(this.buffer.subarray(this.contentTail));
+    const n = await this.conn.read(this.buffer.subarray(this.contentTail));
     if (typeof n === "number") {
       this.contentTail += n;
     } else {
@@ -67,7 +68,8 @@ export class RedisParser {
       value: []
     };
     for (let i = 0; i < count; i++) {
-      ret.value.push(await this.parse() as typeof ret.value[0]);
+      const item = await this.parse();
+      ret.value.push(item as ArrayItem);
     }
     return ret;
   }
@@ -87,7 +89,10 @@ export class RedisParser {
       value: buffer
     };
   }
-  private async parse(): Promise<RedisValue> {
+  public async parse(): Promise<RedisValue> {
+    if (this.start >= this.contentTail) {
+      await this.readMore();
+    }
     let c = String.fromCharCode(this.buffer[this.start]);
     // console.log(this.buffer, bufferToString(this.buffer), c);
     // console.log(this.start, this.contentTail);
@@ -117,15 +122,6 @@ export class RedisParser {
         throw new FatalError("Protocol Error");
     }
   }
-  public async getResp(): Promise<RedisValue> {
-    if (this.contentTail - this.start === 0) {
-      await this.readMore();
-    }
-    if (this.contentTail === this.start) {
-      throw new FatalError("No content to parse");
-    }
-    return await this.parse();
-  }
 }
 
 if (import.meta.main) {
@@ -152,6 +148,6 @@ if (import.meta.main) {
     stream.writeSync(buffers[i]);
   }
   const p = new RedisParser(stream);
-  const resp = show(await p.getResp());
+  const resp = show(await p.parse());
   console.log(resp);
 }

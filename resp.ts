@@ -19,10 +19,10 @@ export interface RedisError {
 export interface RedisNil {
   tag: "RedisNil";
 }
-
+export type ArrayItem = RedisString | RedisNumber | RedisError | RedisBulkString;
 export interface RedisArray {
   tag: "RedisArray";
-  value: (RedisString | RedisNumber | RedisError | RedisBulkString)[];
+  value: ArrayItem[];
 }
 
 export type RedisValue = RedisString | RedisNumber | RedisError | RedisNil
