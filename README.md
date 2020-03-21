@@ -2,13 +2,14 @@
 
 TinyRedis is a **redis server** and **redis protocol facilities** developed with [TypeScript](https://www.typescriptlang.org) and platformed on [Deno](https://deno.land/). 
 
-TinyRedis can be used to implement lightwight Redis like applications for some reason, for example:
+TinyRedis can be used to implement lightweight Redis like applications for some reason, for example:
 
-1. Create a Redis like app in browser (it’s totally compatable to web).
+1. Create a Redis like app in browser (it’s totally compatible to web).
 2. Create Redis Client cli or library.
 3. Create Redis proxy to inject some logic or scripting (it’s easy to add JavaScript scripting support).
 
 ## Guide
+[Get Deno](https://deno.land/) if you do not have one.
 
 One line command to get a running Redis:
 
@@ -18,7 +19,6 @@ deno -A https://raw.githubusercontent.com/qingant/tiny-redis/master/mod.ts
 
 Surely you can also clone the repo `https://github.com/qingant/tiny-redis.git` and then run `deno -A mod.ts` in the project directory.
 
-[Get Deno](https://deno.land/) if you do not have one:
 
 Write the content below into `test.ts` wherever you like and run `deno -A test.ts`,
 
