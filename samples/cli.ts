@@ -6,14 +6,15 @@ const main = async () => {
     const config = argParse(args);
     const opts = {
       port: config.p || 6636,
-      hostname: config.h || "0.0.0.0"
+      hostname: config.h || "127.0.0.1"
     };
     // connect to redis server
     const conn = await Deno.connect(opts)
 
     // create a redis command and encode it to [Uint8Array]
     const cmdEncoded = redis.encode(redis.Redis.array([
-        'COMMAND',
+        'INFO',
+        'MEMORY',
     ]));
 
     // send the command to redis server
