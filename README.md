@@ -3,7 +3,6 @@
 TinyRedis is a **redis server** and **redis protocol facilities** developed with [TypeScript](https://www.typescriptlang.org) and platformed on [Deno](https://deno.land/). 
 
 ## Guide
-[Get Deno](https://deno.land/) if you do not have one.
 
 One line command to get a running Redis ([Get Deno](https://deno.land/) if you do not have one:):
 
