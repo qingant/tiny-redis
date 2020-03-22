@@ -3,6 +3,7 @@
 TinyRedis is a **redis server** and **redis protocol facilities** developed with [TypeScript](https://www.typescriptlang.org) and platformed on [Deno](https://deno.land/). 
 
 ## Guide
+[Get Deno](https://deno.land/) if you do not have one.
 
 One line command to get a running Redis ([Get Deno](https://deno.land/) if you do not have one:):
 
@@ -77,12 +78,12 @@ const main = async () => {
 main()
 ```
 
-Then you can request your `TINY` command:
+Then you can request your `TINY` command by:
 
 ```
-(base) ➜  ~ redis-cli -p 6666 'tiny'
-"REDIS"
+redis-cli -p 6666 'tiny'
 ```
+And you will get "REDIS" as response.
 
 It's not that amazing. But if you want your service talk redis protocol so that it can be accessed anywhere with any language, this may be a quick start in TypeScript/Deno world.
 
