@@ -2,29 +2,18 @@
 
 TinyRedis is a **redis server** and **redis protocol facilities** developed with [TypeScript](https://www.typescriptlang.org) and platformed on [Deno](https://deno.land/). 
 
-TinyRedis can be used to implement lightwight Redis like applications for some reason, for example:
-
-1. Create a Redis like app in browser (it’s totally compatable to web).
-2. Create Redis Client cli or library.
-3. Create Redis proxy to inject some logic or scripting (it’s easy to add JavaScript scripting support).
-
 ## Guide
 
-One line command to get a running Redis:
+One line command to get a running Redis ([Get Deno](https://deno.land/) if you do not have one:):
 
 ```shell
-deno -A https://raw.githubusercontent.com/qingant/tiny-redis/master/mod.ts
+deno -A https://raw.githubusercontent.com/qingant/tiny-redis/master/mod.ts -h 127.0.0.1 -p 6666
 ```
 
-Surely you can also clone the repo `https://github.com/qingant/tiny-redis.git` and then run `deno -A mod.ts` in the project directory.
-
-[Get Deno](https://deno.land/) if you do not have one:
-
-Write the content below into `test.ts` wherever you like and run `deno -A test.ts`,
-
-( Remeber to modify the connection options to connect to a REAL redis instance, surely you can also connect to the TinyRedis instance you just started. )
-
+Client Sample:
 ```typescript
+// also you can run this by `deno -A https://raw.githubusercontent.com/qingant/tiny-redis/master/samples/cli.ts`
+
 import { encode, RedisValueOf, RedisParser, show } from 'https://raw.githubusercontent.com/qingant/tiny-redis/master/mod.ts';
 
 const main = async () => {
@@ -55,15 +44,7 @@ const main = async () => {
 await main();
 ```
 
-It's a little low-level. But with these facilities , you can easily write a REAL redis client library within several hours (Certainly it won’t be a product level one) .
-
-BTW: if you did not want to do this copy/paste work, just run with:
-
-```shell
-deno -A https://raw.githubusercontent.com/qingant/tiny-redis/master/samples/cli.ts -p 6379
-```
-
-For the server side, if you want to implement something that talks redis protocol , Look at this:
+Server Side (if you want to implement something that talks redis protocol , Look at this):
 
 ```typescript
 import {RedisArray, RedisValue, RedisClient, RedisValueOf, BaseHandler} from 'https://raw.githubusercontent.com/qingant/tiny-redis/master/mod.ts';
@@ -96,7 +77,7 @@ const main = async () => {
 main()
 ```
 
-And then you can see something like this in your terminal:
+Then you can request your `TINY` command:
 
 ```
 (base) ➜  ~ redis-cli -p 6666 'tiny'
