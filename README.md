@@ -9,6 +9,7 @@ One line command to get a running Redis ([Get Deno](https://deno.land/) if you d
 ```shell
 deno -A https://raw.githubusercontent.com/qingant/tiny-redis/master/mod.ts -h 127.0.0.1 -p 6666
 ```
+( Currently only several commands supported, use `COMMAND` in `redis-cli` to get current support commands. )
 
 Client Sample:
 ```typescript
