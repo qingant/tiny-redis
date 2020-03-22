@@ -9,7 +9,6 @@ const opts = {
 };
 
 const main = async () => {
-
   // connect to redis server
   const conn = await Deno.connect(opts);
 

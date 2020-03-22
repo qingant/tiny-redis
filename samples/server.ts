@@ -24,7 +24,6 @@ class MyHandler extends BaseHandler {
 }
 
 const main = async () => {
-
   const listener = Deno.listen(opts);
   const handler = new MyHandler();
   console.log("Tiny Redis 0.0.1");
